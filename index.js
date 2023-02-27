@@ -6,7 +6,9 @@ const emotionRadios = document.querySelector('#emotion-radios')
 function getEmotionsArray(cats){
     for(let cat of cats){
         for(let emotions of cat.emotionTags){
-            emotionsArray.push(emotions)
+            if(!emotionsArray.includes(emotions)){
+                emotionsArray.push(emotions)
+            }
         }
     }
     return emotionsArray
