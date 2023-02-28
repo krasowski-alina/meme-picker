@@ -18,9 +18,13 @@ function changeColorOnClickedElem(e){
 function getMatchingCatsArray(){
     const isGif = gifsOnlyOption.checked
     const selectedEmotion = document.querySelector("input[type='radio']:checked").value
-    
+
     const matchingCatsArray = catsData.filter(function(emotion){
-        return emotion.emotionTags.includes(selectedEmotion)
+        if(isGif){
+            return emotion.emotionTags.includes(selectedEmotion) && isGif
+        } else {
+            return emotion.emotionTags.includes(selectedEmotion)
+        }
     })
     console.log(matchingCatsArray)
 }
