@@ -2,7 +2,12 @@ import { catsData } from '/data.js'
 const emotionsArray = []
 const emotionRadios = document.querySelector('#emotion-radios')
 
+emotionRadios.addEventListener("change", changeColorOnClickedElem)
 
+function changeColorOnClickedElem(e){
+    const clickedElem = document.getElementById(e.target.id).parentElement
+    clickedElem.classList.add("highlight")
+}
 function getEmotionsArray(cats){
     for(let cat of cats){
         for(let emotions of cat.emotionTags){
