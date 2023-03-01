@@ -5,7 +5,7 @@ const getImageBtn = document.querySelector('#get-image-btn')
 const gifsOnlyOption = document.querySelector('#gifs-only-option')
 
 emotionRadios.addEventListener("change", changeColorOnClickedElem)
-getImageBtn.addEventListener("click", getMatchingCatsArray)
+getImageBtn.addEventListener("click", renderCat)
 
 function changeColorOnClickedElem(e){
     const removeClass = document.querySelectorAll('.radio')
@@ -19,14 +19,26 @@ function getMatchingCatsArray(){
     const isGif = gifsOnlyOption.checked
     const selectedEmotion = document.querySelector("input[type='radio']:checked").value
 
-    const matchingCatsArray = catsData.filter(function(emotion){
+    const matchingCatsArray = catsData.filter(emotion => {
         if(isGif){
-            return emotion.emotionTags.includes(selectedEmotion) && isGif
+            return  emotion.isGif && emotion.emotionTags.includes(selectedEmotion)
         } else {
             return emotion.emotionTags.includes(selectedEmotion)
         }
     })
-    console.log(matchingCatsArray)
+    return matchingCatsArray
+}
+function getSingleCatObject(){
+    const catsArray = getMatchingCatsArray()
+    if(catsArray.length === 1){
+        console.log(catsArray[0])
+    } else { 
+        const randomNumber = Math.floor(Math.random() * catsArray.length)
+        console.log(catsArray[randomNumber])
+    }
+}
+function renderCat(){
+    getSingleCatObject() //temporary 
 }
 function getEmotionsArray(cats){
     for(let cat of cats){
@@ -38,7 +50,6 @@ function getEmotionsArray(cats){
     }
     return emotionsArray
 }
-
 function renderEmotionsRadios(cats){
     const emotions = getEmotionsArray(cats)
     let radioItems = ""
