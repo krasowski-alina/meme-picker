@@ -5,9 +5,13 @@ const getImageBtn = document.querySelector('#get-image-btn')
 const gifsOnlyOption = document.querySelector('#gifs-only-option')
 const memeModalInner = document.querySelector('#meme-modal-inner')
 const memeModal = document.querySelector('#meme-modal')
+const memeModalCloseBtn = document.querySelector('#meme-modal-close-btn')
 
 emotionRadios.addEventListener("change", changeColorOnClickedElem)
 getImageBtn.addEventListener("click", renderCat)
+memeModalCloseBtn.addEventListener("click", ()=> {
+    memeModal.style.display = "none"
+})
 
 function changeColorOnClickedElem(e){
     const removeClass = document.querySelectorAll('.radio')
@@ -41,7 +45,9 @@ function getSingleCatObject(){
 }
 function renderCat(){
     const catObject = getSingleCatObject() 
-    memeModalInner.innerHTML = `<img src="/images/${catObject.image}" alt="/images/${catObject.alt}">`
+    memeModalInner.innerHTML = `<img class="cat-img"
+                                    src="/images/${catObject.image}"
+                                    alt="/images/${catObject.alt}">`
     memeModal.style.display= "flex"
     console.log(catObject.image)
 }
