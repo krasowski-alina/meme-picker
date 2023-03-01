@@ -3,6 +3,8 @@ const emotionsArray = []
 const emotionRadios = document.querySelector('#emotion-radios')
 const getImageBtn = document.querySelector('#get-image-btn')
 const gifsOnlyOption = document.querySelector('#gifs-only-option')
+const memeModalInner = document.querySelector('#meme-modal-inner')
+const memeModal = document.querySelector('#meme-modal')
 
 emotionRadios.addEventListener("change", changeColorOnClickedElem)
 getImageBtn.addEventListener("click", renderCat)
@@ -31,14 +33,17 @@ function getMatchingCatsArray(){
 function getSingleCatObject(){
     const catsArray = getMatchingCatsArray()
     if(catsArray.length === 1){
-        console.log(catsArray[0])
+        return catsArray[0]
     } else { 
         const randomNumber = Math.floor(Math.random() * catsArray.length)
-        console.log(catsArray[randomNumber])
+        return catsArray[randomNumber]
     }
 }
 function renderCat(){
-    getSingleCatObject() //temporary 
+    const catObject = getSingleCatObject() 
+    memeModalInner.innerHTML = `<img src="/images/${catObject.image}" alt="/images/${catObject.alt}">`
+    memeModal.style.display= "flex"
+    console.log(catObject.image)
 }
 function getEmotionsArray(cats){
     for(let cat of cats){
